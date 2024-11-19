@@ -1,0 +1,26 @@
+name: Olivero Custom
+type: theme
+base theme: olivero
+description: 'Un subtema basado en Olivero para Drupal 11.'
+core_version_requirement: ^10 || ^11
+package: Custom
+libraries:
+  - olivero_custom/global-styling
+  
+# Keep main Olivero regions to ease update.
+regions:
+  header: Header
+  primary_menu: Primary menu
+  secondary_menu: Secondary menu
+  hero: Hero (full width)
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  social: Social Bar
+  content_above: Content Above
+  content: Content
+  sidebar: Sidebar
+  content_below: Content Below
+  footer_top: Footer Top
+  footer_bottom: Footer Bottom
+
+

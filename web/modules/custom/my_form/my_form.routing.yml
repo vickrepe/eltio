@@ -1,0 +1,7 @@
+my_form.form:
+  path: '/my-form'
+  defaults:
+    _form: '\Drupal\my_form\Form\MyForm'
+    _title: 'Formulario Personalizado'
+  requirements:
+    _permission: 'access content'

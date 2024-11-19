@@ -1,0 +1,59 @@
+/**
+ * @file
+ * Olivero specific CSS overrides.
+ */
+ .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .styled-table thead tr {
+    background-color: #f3f3f3; /* Color gris para los encabezados */
+    border-bottom: 2px solid #dddddd;
+  }
+  
+  .styled-table th,
+  .styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+  }
+  
+  .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9; /* Color para filas alternas */
+  }
+  
+  .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+
+  .saldo-positivo {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .saldo-negativo {
+    color: red;
+    font-weight: bold;
+  }
+  
+/* Alinear los campos 'Debe' y 'Pagado' horizontalmente en pantallas grandes */
+@media (min-width: 768px) {
+  .custom-debe-wrapper,
+  .custom-pagado-wrapper {
+    display: inline-block;
+    width: 48%; /* Ajusta el ancho según sea necesario */
+    margin-right: 2%; /* Separación entre los campos */
+  }
+
+  .custom-pagado-wrapper {
+    margin-right: 0; /* Elimina margen para el último elemento */
+  }
+}
+
+/* Estilo adicional para observaciones */
+.custom-observaciones-wrapper {
+  margin-top: 1rem;
+}

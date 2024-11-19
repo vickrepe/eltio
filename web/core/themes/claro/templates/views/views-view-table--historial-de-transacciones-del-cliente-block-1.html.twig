@@ -1,0 +1,21 @@
+
+<table>
+  <thead>
+    <tr>
+      <th>Debeeeee</th>
+      <th>Pagado</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaccion in node.field_transacciones %}
+      {% set data = transaccion.value|json_decode %}
+      <tr>
+        <td>{{ data.debe ?: '-' }}</td>
+        <td>{{ data.pagado ?: '-' }}</td>
+        <td>{{ data.fecha ?: '-' }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+

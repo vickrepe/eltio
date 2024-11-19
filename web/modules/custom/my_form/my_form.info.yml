@@ -1,0 +1,8 @@
+name: 'Mi Formulario'
+type: module
+description: 'Un módulo para crear un formulario personalizado.'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - drupal:system
+version: 1.0

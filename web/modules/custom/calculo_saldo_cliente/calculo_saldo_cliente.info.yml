@@ -1,0 +1,7 @@
+name: 'Cálculo de Saldo para Clientes'
+type: module
+description: 'Resta el campo pagado del campo debe para calcular el saldo pendiente de cada cliente.'
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - drupal:node

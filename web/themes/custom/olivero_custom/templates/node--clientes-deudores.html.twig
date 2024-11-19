@@ -1,0 +1,55 @@
+<div class="node--clientes-deudores">
+  <h1>{{ node.label }}</h1>
+
+  <!-- Mostrar el saldo con una clase condicional -->
+  <h2 class="{{ node.field_saldo.value < 0 ? 'saldo-negativo' : 'saldo-positivo' }}">
+    Saldo: ${{ node.field_saldo.value }}
+  </h2>
+
+  <!-- Bloque Editable Fields -->
+  <div class="editable-fields-block">
+    {{ editable_fields_block }}
+  </div>
+
+    <!-- Bloque Editable Fields -->
+  <div class="editable-fields-block">
+    <div class="field-group">
+      <div class="field-item">
+        {{ form.debe }}
+      </div>
+      <div class="field-item">
+        {{ form.pagado }}
+      </div>
+    </div>
+    <div class="field-observations">
+      {{ form.observaciones }}
+    </div>
+    {{ form.submit }}
+  </div>
+
+  <h4>Historial de transacciones del cliente</h4>
+  {% if transacciones|length > 0 %}
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Debe</th>
+          <th>Pagado</th>
+          <th>Observaciones</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for transaccion in transacciones %}
+          <tr>
+            <td>{{ transaccion.debe }}</td>
+            <td>{{ transaccion.pagado }}</td>
+            <td>{{ transaccion.observaciones }}</td>
+            <td>{{ transaccion.fecha }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No hay transacciones disponibles.</p>
+  {% endif %}
+</div>

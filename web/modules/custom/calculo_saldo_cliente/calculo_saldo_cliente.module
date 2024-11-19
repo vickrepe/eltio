@@ -1,0 +1,56 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_entity_presave().
+ */
+function calculo_saldo_cliente_entity_presave(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'clientes_deudores') {
+    // Solo establece el título automáticamente.
+    $nombre = $entity->get('field_nombre')->value;
+    if (!empty($nombre)) {
+      $entity->setTitle($nombre);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() para ocultar el título en el tipo de contenido Pago.
+ */
+function calculo_saldo_cliente_form_node_pago_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Ocultar el campo de título.
+  $form['title']['#access'] = FALSE;
+
+  // Configurar un título automático para evitar errores al guardar.
+  $form['#submit'][] = 'calculo_saldo_cliente_set_titulo_automatico';
+}
+
+/**
+ * Función de envío para generar automáticamente el título.
+ */
+function calculo_saldo_cliente_set_titulo_automatico($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  // Configura un título automático.
+  $node = $form_state->getFormObject()->getEntity();
+  $node->setTitle('Pago ' . date('Y-m-d H:i:s'));
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function calculo_saldo_cliente_form_alter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Aplica solo al formulario 'editable_fields_form'.
+  if ($form_id === 'editable_fields_form') {
+    // Añade clases personalizadas al campo "Debe".
+    $form['debe']['#attributes']['class'][] = 'custom-debe-class';
+    $form['debe']['#wrapper_attributes']['class'][] = 'custom-debe-wrapper';
+
+    // Añade clases personalizadas al campo "Pagado".
+    $form['pagado']['#attributes']['class'][] = 'custom-pagado-class';
+    $form['pagado']['#wrapper_attributes']['class'][] = 'custom-pagado-wrapper';
+
+    // Añade clases personalizadas al campo "Observaciones".
+    $form['observaciones']['#attributes']['class'][] = 'custom-observaciones-class';
+    $form['observaciones']['#wrapper_attributes']['class'][] = 'custom-observaciones-wrapper';
+  }
+}

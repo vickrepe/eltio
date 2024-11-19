@@ -1,0 +1,17 @@
+# Ignorar configuraciones locales.
+sites/default/files
+sites/default/settings.local.php
+
+# Ignorar caché de Composer.
+vendor/
+composer.lock
+
+# Ignorar configuraciones de entorno.
+.env
+
+# Ignorar caché de Drupal.
+sites/default/files/*
+
+# Archivos de IDE.
+*.idea
+*.vscode

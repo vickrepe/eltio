@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming.
+ */
+
+use \Drupal\Core\Asset\AttachedAssetsInterface;
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function olivero_custom_preprocess_node(array &$variables) {
+  // Aplica solo al tipo de contenido "clientes_deudores".
+  if ($variables['node']->getType() === 'clientes_deudores') {
+    $block_manager = \Drupal::service('plugin.manager.block');
+    $block_plugin = $block_manager->createInstance('editable_fields_block');
+    
+    // Asignamos el resultado de build() a una variable antes de pasarlo a render().
+    $block_content = $block_plugin->build();
+    $render_block = \Drupal::service('renderer')->render($block_content);
+    
+    // Renderiza el bloque y lo envía al template.
+    $variables['editable_fields_block'] = $render_block;
+
+    $node = $variables['node'];
+
+    // Obtén el campo de transacciones.
+    $field_values = $node->get('field_transacciones')->getValue();
+    $transacciones = $field_values ?: []; // Garantiza que sea un array.
+
+    // Decodifica cada transacción.
+    $transacciones_decoded = [];
+    foreach ($transacciones as $transaccion) {
+      $data = json_decode($transaccion['value'], TRUE);
+      if ($data) {
+        $transacciones_decoded[] = [
+          'debe' => !empty($data['debe']) ? $data['debe'] : '-',  // Si no hay valor, muestra "-".
+          'pagado' => !empty($data['pagado']) ? $data['pagado'] : '-',
+          'observaciones' => !empty($data['observaciones']) ? $data['observaciones'] : '',
+          'fecha' => !empty($data['fecha']) ? $data['fecha'] : '-',
+        ];
+      }
+    }
+
+    // Envía las transacciones decodificadas al template Twig.
+    $variables['transacciones'] = $transacciones_decoded;
+  }
+}
+
+
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function olivero_custom_preprocess_block(array &$variables) {
+  // Asegúrate de procesar solo el bloque específico.
+  if (isset($variables['plugin_id']) && $variables['plugin_id'] === 'editable_fields_block') {
+    $variables['attributes']['class'][] = 'editable-fields-block';
+  }
+}

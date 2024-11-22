@@ -1,0 +1,43 @@
+uuid: b39ed30a-adae-42c4-ad11-d2cf46654cfc
+langcode: es
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.clientes_deudores.body
+    - field.field.node.clientes_deudores.field_comentarios_clientes_opcio
+    - field.field.node.clientes_deudores.field_debe
+    - field.field.node.clientes_deudores.field_nombre
+    - field.field.node.clientes_deudores.field_pagado
+    - field.field.node.clientes_deudores.field_saldo
+    - field.field.node.clientes_deudores.field_transacciones
+    - node.type.clientes_deudores
+  module:
+    - text
+    - user
+id: node.clientes_deudores.teaser
+targetEntityType: node
+bundle: clientes_deudores
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_comentarios_clientes_opcio: true
+  field_debe: true
+  field_nombre: true
+  field_pagado: true
+  field_saldo: true
+  field_transacciones: true
+  langcode: true

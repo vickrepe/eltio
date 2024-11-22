@@ -1,0 +1,30 @@
+uuid: 685aa1d1-a2e3-4ef5-a277-91c217ffe886
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_comentarios_clientes_opcio
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.plain_text
+    - filter.format.restricted_html
+    - node.type.clientes_deudores
+  module:
+    - text
+id: node.clientes_deudores.field_comentarios_clientes_opcio
+field_name: field_comentarios_clientes_opcio
+entity_type: node
+bundle: clientes_deudores
+label: 'Comentarios clientes (opcional)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+    - restricted_html
+    - full_html
+    - plain_text
+field_type: text_long

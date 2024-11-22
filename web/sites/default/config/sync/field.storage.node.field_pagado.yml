@@ -1,0 +1,20 @@
+uuid: 8352018b-883a-4b05-94f3-112649dd2949
+langcode: es
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_pagado
+field_name: field_pagado
+entity_type: node
+type: decimal
+settings:
+  precision: 10
+  scale: 2
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,23 @@
+uuid: dbcc2f58-3c55-475d-8145-a3bdab94ddfd
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pagado
+    - node.type.clientes_deudores
+id: node.clientes_deudores.field_pagado
+field_name: field_pagado
+entity_type: node
+bundle: clientes_deudores
+label: Pagado
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: $
+  suffix: ''
+field_type: decimal

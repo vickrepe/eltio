@@ -42,15 +42,33 @@ class EditableFieldsForm extends FormBase {
       '#required' => FALSE,
     ];
 
-    // Campo "Observaciones".
-    $form['observaciones'] = [
+    $form['observaciones_wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['observaciones-wrapper'],
+      ],
+    ];
+    
+    // Botón de toggle para Observaciones.
+    $form['observaciones_wrapper']['observaciones_toggle'] = [
+      '#type' => 'markup',
+      '#markup' => '<div class="observaciones-toggle">Observaciones ▼</div>',
+    ];
+    
+    // Campo Observaciones.
+    $form['observaciones_wrapper']['observaciones'] = [
       '#type' => 'textarea',
-      '#title' => $this->t('Observaciones'),
+      '#title' => '', // Sin título.
       '#placeholder' => $this->t('Ingrese observaciones'),
       '#default_value' => '',
       '#rows' => 2,
       '#required' => FALSE,
+      '#attributes' => [
+        'class' => ['observaciones-field'],
+        'style' => 'display: none;', // Ocultarlo inicialmente.
+      ],
     ];
+    
   
     // Botón de guardar.
     $form['submit'] = [
@@ -96,7 +114,6 @@ class EditableFieldsForm extends FormBase {
   
       // Registra la transacción como un nuevo valor en el campo multivalor "Transacciones".
       $transacciones = $node->get('field_transacciones')->getValue() ?: [];
-  
       // Crear una nueva transacción basada en los valores ingresados.
       $nueva_transaccion = [
         'value' => json_encode([
@@ -104,6 +121,7 @@ class EditableFieldsForm extends FormBase {
           'pagado' => !empty($pagado) ? $pagado : '',
           'observaciones' => !empty($observaciones) ? $observaciones : '',
           'fecha' => $fecha,
+          'saldo' => $saldo_actual,
         ]),
       ];
   
@@ -111,17 +129,25 @@ class EditableFieldsForm extends FormBase {
       $transacciones[] = $nueva_transaccion;
   
       // Establecer el nuevo valor del campo transacciones.
-      $node->set('field_transacciones', $transacciones);
+      $node->set('field_transacciones', array_reverse($transacciones)); // Los últimos primero.
   
       // Guarda el nodo actualizado.
       $node->save();
   
-      // Mensaje de confirmación.
-      \Drupal::messenger()->addMessage($this->t('Transacción guardada correctamente. Saldo actualizado.'));
+      // Log para depuración.
+      \Drupal::logger('calculo_saldo_cliente')->notice('Nueva transacción: @transaccion', [
+        '@transaccion' => print_r($nueva_transaccion, TRUE),
+      ]);
+  
+      \Drupal::logger('calculo_saldo_cliente')->notice('Transacciones actualizadas: @transacciones', [
+        '@transacciones' => print_r($transacciones, TRUE),
+      ]);
   
       // Redirige al nodo actual.
       $form_state->setRedirect('entity.node.canonical', ['node' => $node->id()]);
+  
+      // Mensaje de confirmación.
+      \Drupal::messenger()->addMessage($this->t('Transacción guardada correctamente. Saldo actualizado.'));
     }
   }
-  
 }

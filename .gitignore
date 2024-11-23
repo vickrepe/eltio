@@ -1,6 +1,8 @@
 # Ignorar configuraciones locales.
 sites/default/files
-sites/default/settings.local.php
+web/sites/default/settings.php
+web/sites/default/files*
+
 
 # Ignorar caché de Composer.
 vendor/

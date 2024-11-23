@@ -41,6 +41,9 @@ function calculo_saldo_cliente_set_titulo_automatico($form, \Drupal\Core\Form\Fo
 function calculo_saldo_cliente_form_alter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   // Aplica solo al formulario 'editable_fields_form'.
   if ($form_id === 'editable_fields_form') {
+    // Adjuntar la librería JavaScript.
+    $form['#attached']['library'][] = 'calculo_saldo_cliente/observaciones_toggle';
+
     // Añade clases personalizadas al campo "Debe".
     $form['debe']['#attributes']['class'][] = 'custom-debe-class';
     $form['debe']['#wrapper_attributes']['class'][] = 'custom-debe-wrapper';

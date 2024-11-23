@@ -37,6 +37,7 @@ function olivero_custom_preprocess_node(array &$variables) {
         $transacciones_decoded[] = [
           'debe' => !empty($data['debe']) ? $data['debe'] : '-',  // Si no hay valor, muestra "-".
           'pagado' => !empty($data['pagado']) ? $data['pagado'] : '-',
+          'saldo' => isset($data['saldo']) ? $data['saldo'] : '-',
           'observaciones' => !empty($data['observaciones']) ? $data['observaciones'] : '',
           'fecha' => !empty($data['fecha']) ? $data['fecha'] : '-',
         ];

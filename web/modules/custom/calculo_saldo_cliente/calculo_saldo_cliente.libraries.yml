@@ -1,0 +1,5 @@
+observaciones_toggle:
+  version: 1.x
+  js:
+    js/observaciones_toggle.js: {}
+

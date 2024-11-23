@@ -1,0 +1,14 @@
+uuid: 7ee8fe3e-d8b9-4740-862a-be8feb6c69f2
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.administradores_negocio
+  module:
+    - user
+id: user_add_role_action.administradores_negocio
+label: 'Añade el rol Administradores_negocio al(los) usuario(s) seleccionado(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: administradores_negocio

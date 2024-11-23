@@ -1,0 +1,28 @@
+uuid: 55262b59-4beb-44b6-90b1-6014ba746cb4
+langcode: es
+status: true
+dependencies:
+  module:
+    - calculo_saldo_cliente
+    - node
+  theme:
+    - olivero
+id: olivero_editablefieldsblock
+theme: olivero
+region: content
+weight: 0
+provider: null
+plugin: editable_fields_block
+settings:
+  id: editable_fields_block
+  label: 'Editable Fields Block'
+  label_display: visible
+  provider: calculo_saldo_cliente
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      clientes_deudores: clientes_deudores

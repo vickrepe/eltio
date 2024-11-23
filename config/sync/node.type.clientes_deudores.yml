@@ -1,0 +1,18 @@
+uuid: d1a3ffb1-6069-44a9-b5d3-eb50017583da
+langcode: es
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Clientes Deudores'
+type: clientes_deudores
+description: null
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

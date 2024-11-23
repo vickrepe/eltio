@@ -17,3 +17,5 @@ sites/default/files/*
 # Archivos de IDE.
 *.idea
 *.vscode
+
+dynhost.sh
